@@ -23,9 +23,9 @@ if __name__ == "__main__":
     # trimmed_traj = trajectory[::5]
     # Extended XYZ to POSCAR
 
-    root = r"E:\calc_results\packmol_scratch\Tol"
+    root = r"E:\calc_results\packmol_scratch\Tol_H2O"
 
-    structure = read(path.join(root, "toluenes.xyz"))
+    structure = read(path.join(root, "interface.xyz"))
     write(path.join(root, "POSCAR"), sort(structure))
 
     # CIF to POSCAR

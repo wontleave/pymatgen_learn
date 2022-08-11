@@ -18,13 +18,12 @@ def orthogonalize_cell(ase_atoms):
     positions = ase_atoms.get_positions()
     new_positions = np.matmul(positions, transformation)
     atoms.set_cell(new_cell, scale_atoms=True)
-    print(np.subtract(new_positions, ase_atoms.get_positions()))
     assert np.allclose(ase_atoms.get_positions(), new_positions), "inconsistency between atom positions calculated " \
                                                                   "manually and with ASE scale_atoms!"
 
 
 if __name__ == "__main__":
-    path_ = r"E:\calc_results\PTC\TOL_H2O_GAMMA_ONLY\ML_ITER9\vasprun.xml"
+    path_ = r"E:\calc_results\PTC\TOL_H2O_GAMMA_ONLY\ML_ITER9"
     atoms = read(path_, index=-1)
     orthogonalize_cell(atoms)
-    write(r"E:\calc_results\PTC\TOL_H2O_GAMMA_ONLY\POSCAR", images=atoms)
+    write(r"E:\calc_results\PTC\TOL_H2O_GAMMA_ONLY\ML_ITER9", images=atoms)
