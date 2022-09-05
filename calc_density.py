@@ -19,7 +19,7 @@ def print_densities(ase_atoms):
 
 
 if __name__ == "__main__":
-    path_ = r"E:\calc_results\PTC\TOLUENES_GAMMA_ONLLY\orthogonal\ML_ITER3\XDATCAR"
+    path_ = r"E:\Temp\XDATCAR"
     ensemble = read(path_, index=":")
     all_densities = [print_densities(atoms) for atoms in ensemble]
     df = pd.Series(all_densities)

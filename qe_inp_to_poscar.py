@@ -1,6 +1,8 @@
 from pymatgen.io.pwscf import PWInput
 from ase.io.espresso import read_espresso_in
 from ase.io.vasp import write_vasp
+from ase.io.dftb import write_dftb
+from ase.io import write
 import ase.build as ase_build
 from ase.constraints import FixAtoms
 import numpy as np
@@ -42,7 +44,7 @@ def find_constraints_from_cartcoords(ase_obj, x=None, y=None, z=None):
     return req_idx
 
 
-root_path = r"E:\TEST\KOPh\plusTBAB"
+root_path = r"E:\calc_results\Electron_dynamics\CdSe_test\001"
 
 full_path = path.join(root_path, "pw.txt")
 poscar_path = path.join(root_path, "POSCAR")
@@ -57,12 +59,15 @@ with open(full_path, "r") as f:
 # qe.set_constraint(fixed_atoms_idx)
 
 # ---------- determine the atoms to freeze based on cartesian coordinates
-fixed_atoms_idx = find_constraints_from_cartcoords(qe, z=6.97)
-fixed_atoms_idx = FixAtoms(fixed_atoms_idx)
+# fixed_atoms_idx = find_constraints_from_cartcoords(qe, z=6.97)
+# fixed_atoms_idx = FixAtoms(fixed_atoms_idx)
 
 # ---------- Set the constraint if necessary
-qe.set_constraint(fixed_atoms_idx)
+# qe.set_constraint(fixed_atoms_idx)
 qe_sorted = ase_build.sort(qe)
 qe.center(axis=2, about=0.)
 # Write the VASP POSCAR
 write_vasp(poscar_path, qe_sorted)
+# write_vasp(poscar_path, qe)
+# write(root_path + "coords.xyz", qe_sorted)
+write_dftb(root_path + "dftb_in.hsd", qe_sorted)
