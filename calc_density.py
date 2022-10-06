@@ -2,6 +2,7 @@ from ase.io import read
 from ase.units import kg, m, _amu
 import numpy as np
 import pandas as pd
+import argparse
 
 
 def print_densities(ase_atoms):
@@ -19,7 +20,10 @@ def print_densities(ase_atoms):
 
 
 if __name__ == "__main__":
-    path_ = r"E:\Temp\XDATCAR"
+    parser = argparse.ArgumentParser(description='Calculate the density from a PBC calculation')
+    parser.add_argument('--path', help='path to the MD trajectory files. E.g. XDATCAR')
+    args = parser.parse_args()
+    path_ = args.path
     ensemble = read(path_, index=":")
     all_densities = [print_densities(atoms) for atoms in ensemble]
     df = pd.Series(all_densities)
