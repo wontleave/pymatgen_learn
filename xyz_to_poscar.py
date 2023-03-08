@@ -23,11 +23,11 @@ if __name__ == "__main__":
     # trimmed_traj = trajectory[::5]
     # Extended XYZ to POSCAR
 
-    root = r"E:\calc_results\packmol_scratch\Tol_H2O_separated"
+    root = r"E:\calc_results\packmol_scratch\MeOH_aq_cube"
 
-    structure = read(path.join(root, "interface.xyz"))
+    structure = read(path.join(root, "aq_MeOH80vv.xyz"))
     write(path.join(root, "POSCAR"), sort(structure))
-
+    # write(path.join(root, "toluenes.dat"), sort(structure), format="lammps-data")
     # CIF to POSCAR
     # full_filename = r"E:\calc_results\CaF2\CaF2_mp-2741_conventional_standard.cif"
     # structure = read(full_filename)
