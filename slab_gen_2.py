@@ -11,19 +11,23 @@ from os import path
 from pathlib import Path
 
 if __name__ == "__main__":
-    full_path = r"E:\calc_results\CO2_to_MeOH\ZnO\ZnO.cif"
-
+    full_path = r"E:\Downloads\NiPt.cif"
+    m1 = 1
+    m2 = 1
+    m3 = 1
     input_struct = Structure.from_file(full_path)
-    input_struct.add_oxidation_state_by_element({"Zn": 2, "O": -2})
-    slabgen = SlabGenerator(input_struct, miller_index=(1, 0, 1),
+    input_struct.add_oxidation_state_by_element({"Ni": 2, "Pt": -2, "H": 0})
+    slabgen = SlabGenerator(input_struct, miller_index=(m1, m2, m3),
                             in_unit_planes=True,
-                            min_slab_size=2.5, min_vacuum_size=7, center_slab=True, reorient_lattice=True)
+                            min_slab_size=3, min_vacuum_size=10, center_slab=True, reorient_lattice=True,
+                            max_normal_search=-10)
     slabs = slabgen.get_slabs()
-    new_root = path.join(path.dirname(full_path), "101")
+    new_root = path.join(path.dirname(full_path), f"{m1}{m2}{m3}")
 
     for n, slab in enumerate(slabs):
-        slab.make_supercell([4, 4, 1])
+        slab.make_supercell([3, 3, 1])
         where = path.join(new_root, str(n))
         Path(where).mkdir(parents=True, exist_ok=True)
         full_path = path.join(where, "POSCAR")
+        print(f"Writing to {full_path}")
         Poscar(slab).write_file(full_path)

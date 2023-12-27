@@ -44,11 +44,11 @@ def find_constraints_from_cartcoords(ase_obj, x=None, y=None, z=None):
     return req_idx
 
 
-root_path = r"E:\calc_results\Electron_dynamics\CdSe_test\001"
+root_path = r"E:\calc_results\cellulose"
 
 full_path = path.join(root_path, "pw.txt")
 poscar_path = path.join(root_path, "POSCAR")
-
+xyz_path = path.join(root_path, "cart.xyz")
 # read a Quantum espresso input with ASE
 with open(full_path, "r") as f:
     qe = read_espresso_in(f)
@@ -69,5 +69,5 @@ qe.center(axis=2, about=0.)
 # Write the VASP POSCAR
 write_vasp(poscar_path, qe_sorted)
 # write_vasp(poscar_path, qe)
-# write(root_path + "coords.xyz", qe_sorted)
-write_dftb(root_path + "dftb_in.hsd", qe_sorted)
+write(xyz_path, qe_sorted)
+# write_dftb(root_path + "dftb_in.hsd", qe_sorted)

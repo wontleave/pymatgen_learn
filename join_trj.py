@@ -27,7 +27,8 @@ if __name__ == "__main__":
     for key in trajectories:
         all_trajectories += trajectories[key]
 
+    write("XDATCAR", all_trajectories)
     energies = np.array([i.get_potential_energy() for i in all_trajectories])
-    plt.plot(energies)
-    plt.ylabel("Potential Energy (eV)")
-    plt.show()
+    # plt.plot(energies)
+    # plt.ylabel("Potential Energy (eV)")
+    # plt.show()
