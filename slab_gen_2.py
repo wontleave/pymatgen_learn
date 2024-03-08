@@ -34,15 +34,15 @@ def find_indices_with_tolerance(array, unique_vals, tol):
 
 
 if __name__ == "__main__":
-    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT\tetragonalNiPt\POSCAR"
+    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT_ISIF8\NiPt_tetragonal\POSCAR"
     m1 = 1
     m2 = 1
-    m3 = 1
+    m3 = 0
     input_struct = Structure.from_file(full_path)
-    input_struct.add_oxidation_state_by_element({"Ni": 0, "Pt": -2})
+    input_struct.add_oxidation_state_by_element({"Pt": -1, "Ni": +1})
     slabgen = SlabGenerator(input_struct, miller_index=(m1, m2, m3),
-                            in_unit_planes=False,
-                            min_slab_size=4, min_vacuum_size=15, center_slab=False, reorient_lattice=True, )
+                            in_unit_planes=False,  lll_reduce=True,
+                            min_slab_size=7, min_vacuum_size=20, center_slab=False, reorient_lattice=False)
     # max_normal_search=-10)
     # vacuum layer will be scaled by the distance between unit planes in the OUC if in_unit_planes=True : complicates
     # min vacuum size.

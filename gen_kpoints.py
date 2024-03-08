@@ -11,7 +11,7 @@ from os import path
 from pathlib import Path
 
 if __name__ == "__main__":
-    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT\tetragonalNiPt\111\0\POSCAR"
+    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT_ISIF8\Pt_FCC\111\0\POSCAR"
     structure = Structure.from_file(full_path)
     kpoints = Kpoints.automatic_density_by_vol(structure, 200)
     # kpoints = Kpoints.automatic_gamma_density(structure, 0.2)
