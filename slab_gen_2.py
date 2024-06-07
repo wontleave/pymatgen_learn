@@ -34,15 +34,15 @@ def find_indices_with_tolerance(array, unique_vals, tol):
 
 
 if __name__ == "__main__":
-    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT_ISIF8\NiPt_tetragonal\POSCAR"
+    full_path = r"E:\calc_results\PtNi_nanowire\Ni_FCC\OPT\CONTCAR"
     m1 = 1
     m2 = 1
-    m3 = 0
+    m3 = 1
     input_struct = Structure.from_file(full_path)
     input_struct.add_oxidation_state_by_element({"Pt": -1, "Ni": +1})
     slabgen = SlabGenerator(input_struct, miller_index=(m1, m2, m3),
                             in_unit_planes=False,  lll_reduce=True,
-                            min_slab_size=7, min_vacuum_size=20, center_slab=False, reorient_lattice=False)
+                            min_slab_size=7, min_vacuum_size=20, center_slab=False, reorient_lattice=True)
     # max_normal_search=-10)
     # vacuum layer will be scaled by the distance between unit planes in the OUC if in_unit_planes=True : complicates
     # min vacuum size.
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     new_root = path.join(path.dirname(full_path), f"{m1}{m2}{m3}")
 
     for n, slab in enumerate(slabs):
-        slab.make_supercell([2, 2, 1])
+        slab.make_supercell([3, 3, -1])
         third_column = slab.frac_coords[:, 2]
         z_coords = unique_with_tolerance(third_column, 1e-6)
         indices = find_indices_with_tolerance(third_column, z_coords[:len(z_coords) // 2], 1e-6)

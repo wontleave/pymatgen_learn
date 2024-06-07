@@ -23,9 +23,9 @@ if __name__ == "__main__":
     # trimmed_traj = trajectory[::5]
     # Extended XYZ to POSCAR
 
-    root = r"E:\calc_results\cellulose"
+    root = r"E:\calc_results\carbon_encapsulated"
 
-    structure = read(path.join(root, "cart.xyz"))
+    structure = read(path.join(root, "C60_1Ni.xyz"))
     write(path.join(root, "POSCAR"), sort(structure))
     # write(path.join(root, "toluenes.dat"), sort(structure), format="lammps-data")
     # CIF to POSCAR

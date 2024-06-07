@@ -6,7 +6,7 @@ from pathlib import Path
 from pymatgen.io.vasp import Poscar
 
 if __name__ == "__main__":
-    full_path = r"E:\calc_results\NiPt MPRelaxSet\PBE-D3BJ\OPT_ISIF8\NiPt111_ortho\OPT\CONTCAR"
+    full_path = r"E:\calc_results\PtNi_nanowire\Ni111_ortho\OPT\CONTCAR"
     structure = Structure.from_file(full_path)
     asf_moco = AdsorbateSiteFinder(structure)
     ads_sites = asf_moco.find_adsorption_sites()
